@@ -1,6 +1,6 @@
 import { IAccountRepository } from "../interfaces/IAccountRepository";
 import { Account } from "../../entities/Account";
-import { getConnection, getManager, Repository } from "typeorm";
+import { getConnection, getManager } from "typeorm";
 import { ICreateAccountDTO } from "@src/useCases/createAccount/CreateAccountDTO";
 
 export class AccountRepository implements IAccountRepository {

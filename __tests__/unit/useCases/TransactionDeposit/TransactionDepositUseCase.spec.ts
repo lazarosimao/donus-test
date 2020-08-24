@@ -2,7 +2,6 @@ import Account from "@src/entities/Account";
 import { Transaction } from "@src/entities/Transaction";
 import { TransactionRepository } from "@src/repositories/implementations/TransactionRepository";
 import { TransactionDepositUseCase } from "@src/useCases/transactionDeposit/TransactionDepositUseCase";
-import { createConnection, getConnection, QueryRunner } from "typeorm";
 
 describe('TransactionDepositUseCase', () => { 
   const transactionDTO = {

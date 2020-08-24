@@ -1,6 +1,6 @@
-import { Connection, createConnection } from 'typeorm'
+import { Connection } from 'typeorm'
 
-let connection: Connection | null = null
+const connection: Connection | null = null
 
 // export async function getConnection() {
 //   const DATABASE_TYPE = 'sqlite';
