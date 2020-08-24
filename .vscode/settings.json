@@ -1,0 +1,17 @@
+{
+    "sqltools.connections": [
+        {
+            "database": "${workspaceFolder:donus-test}/src/database/storage/db-donus.sqlite3",
+            "driver": "SQLite",
+            "name": "sqlite",
+            "previewLimit": 50
+        },
+        {
+            "database": "${workspaceFolder:donus-test}/__tests__/database/storage/db-donus-tests.sqlite3",
+            "driver": "SQLite",
+            "name": "db-test",
+            "previewLimit": 50
+        }
+    ],
+    "sqltools.useNodeRuntime": true
+}

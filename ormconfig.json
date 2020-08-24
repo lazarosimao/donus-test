@@ -1,0 +1,19 @@
+[
+   {
+      "name": "default",
+      "type": "sqlite",
+      "database": "./src/database/storage/db-donus.sqlite3",
+      "entities": [
+         "src/entities/**/*.ts"
+      ],
+      "migrations": [
+         "src/database/migration/**/*.ts"
+      ],
+      "cli": {
+         "entitiesDir": "src/entities",
+         "migrationsDir": "src/database/migration",
+         "subscribersDir": "src/database/subscriber"
+      }
+   }
+]
+
