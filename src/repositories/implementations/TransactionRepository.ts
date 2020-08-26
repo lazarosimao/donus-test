@@ -27,11 +27,11 @@ export class TransactionRepository implements ITransactionRepository {
 
   async statementOfAccount(accountId: number): Promise<Transaction[] | boolean> {
     const repository = getConnection().getRepository(Transaction);
-    
     return await repository.find({
-      where: {
-        accountId: accountId
-      },
+      where: [
+        { accountId: accountId },
+        { toAccountId: accountId }
+      ],
       order: {
         id: "DESC"
       }
