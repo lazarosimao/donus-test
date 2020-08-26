@@ -27,3 +27,9 @@ export class Transaction {
   @Column({ name: 'total', type: "double", precision: 10, scale: 2, default: 0.00 }) 
   public total: number;
 }
+
+export class TransactionType {
+  static DEPOSIT: string = 'deposit';
+  static WITHDRAW: string = 'withdraw';
+  static TRANSFER: string = 'transfer';
+}

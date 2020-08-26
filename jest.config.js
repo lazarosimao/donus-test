@@ -7,6 +7,7 @@ module.exports = {
   testEnvironment: 'node',
   clearMocks: true,
   preset: 'ts-jest',
+  maxConcurrency: 1,
   collectCoverage: true,
   collectCoverageFrom: [
     '@src/**', 

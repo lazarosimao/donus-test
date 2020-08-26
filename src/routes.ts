@@ -4,23 +4,26 @@ import { transactionDepositController } from "./useCases/transactionDeposit";
 import { transactionWithdrawController } from "./useCases/transactionWithdraw";
 import { transactionTransferController } from "./useCases/transactionTransfer";
 import { bankStatementController } from "./useCases/bankStatement";
+import {
+  validCreateAccount, validTransactionDepositWithdraw, validTransactionTransfer
+} from "./middlewares/validate-body.middleware";
 
 const router = Router();
 const basepath = '/api/v1';
 
-router.post(`${ basepath }/account/create`, (request, response) => {
+router.post(`${ basepath }/account/create`, validCreateAccount(), (request, response) => {
   return createAccountController.handle(request, response);
 });
 
-router.post(`${ basepath }/transactions/deposit`, (request, response) => {
+router.post(`${ basepath }/transactions/deposit`, validTransactionDepositWithdraw(), (request, response) => {
   return transactionDepositController.handle(request, response);
 });
 
-router.post(`${ basepath }/transactions/withdraw`, (request, response) => {
+router.post(`${ basepath }/transactions/withdraw`, validTransactionDepositWithdraw(), (request, response) => {
   return transactionWithdrawController.handle(request, response);
 });
 
-router.post(`${ basepath }/transactions/transfer`, (request, response) => {
+router.post(`${ basepath }/transactions/transfer`, validTransactionTransfer(),(request, response) => {
   return transactionTransferController.handle(request, response);
 });
 

@@ -14,7 +14,7 @@ account.id = 999
 
 
 describe('CreateAccountUseCase', () => {
-  it('Deveria criar uma nova conta com sucesso', async () => {
+  it('Should create a new account successfully', async () => {
     const accountRepository = new AccountRepository();
     const createAccountUseCase = new CreateAccountUseCase(accountRepository);
     const expectedReturn = account;
@@ -35,7 +35,7 @@ describe('CreateAccountUseCase', () => {
     expect(mocks.AccountRepository.create).toBeCalledTimes(1);
   });
 
-  it('Deveria falhar a criação da conta por causa dos dados em branco', async () => {
+  it('Should Account creation must fail due to blank data', async () => {
     const accountRepository = new AccountRepository();
     const createAccountUseCase = new CreateAccountUseCase(accountRepository);
     const expectedReturn = account;
@@ -59,7 +59,7 @@ describe('CreateAccountUseCase', () => {
     expect(mocks.AccountRepository.create).not.toBeCalled();
   });
 
-  it('Deveria falhar a criação da conta por conta de já existir uma cadastro para o cpf informado', async () => {
+  it('Should fail to create the account because there is already a registration for the informed cpf', async () => {
     const accountRepository = new AccountRepository();
     const createAccountUseCase = new CreateAccountUseCase(accountRepository);
     const expectedReturn = account;

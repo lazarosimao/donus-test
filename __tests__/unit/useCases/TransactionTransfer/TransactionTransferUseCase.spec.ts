@@ -2,6 +2,9 @@ import Account from "@src/entities/Account";
 import { Transaction } from "@src/entities/Transaction";
 import { TransactionRepository } from "@src/repositories/implementations/TransactionRepository";
 import { TransactionTransferUseCase } from "@src/useCases/transactionTransfer/TransactionTransferUseCase";
+import { Connection, createConnection, getConnection } from "typeorm";
+
+let connection: Connection;
 
 describe('TransactionTransferUseCase', () => { 
   const transactionDTO = {
@@ -23,7 +26,18 @@ describe('TransactionTransferUseCase', () => {
   transaction.bonusAmount = 1.00;
   transaction.total = 201.00;
 
-  it('Deve criar uma transação de transferencia', async () => { 
+  beforeAll(async () => {
+    connection = await createConnection();
+    await connection.runMigrations();
+  });
+
+  afterAll(async () => {
+    const mainConnection = getConnection();
+    await connection.close();
+    await mainConnection.close();
+  });
+
+  it('Should must create a transfer transaction', async () => { 
     const transactionRepository = new TransactionRepository();
     const transactionTransferUseCase = new TransactionTransferUseCase(transactionRepository);
 

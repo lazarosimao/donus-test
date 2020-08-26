@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { TransactionTransferUseCase } from "./TransactionTransferUseCase";
 import { transactionTransferUseCase } from ".";
+import Logger from "../../usefulness/Logger";
 
 export class TransactionTransferController { 
   constructor(
@@ -14,11 +15,15 @@ export class TransactionTransferController {
       const result = await transactionTransferUseCase.execute({
         accountId, amountRequest, toAccountId
       })
-      
+      Logger.info(`Sucesso: ${result}`);
       return response.status(201).json({ message: result });
 
     } catch (error) {
-      return response.status(422).json({ message: error });
+      Logger.error(error.message || 'Unexpected error.');
+
+      return response.status(error.statusCode).json({
+        message: error.message || 'Unexpected error.'
+      });
     }
   }
 }

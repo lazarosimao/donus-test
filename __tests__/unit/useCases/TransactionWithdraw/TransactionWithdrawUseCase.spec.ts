@@ -2,6 +2,9 @@ import Account from "@src/entities/Account";
 import { Transaction } from "@src/entities/Transaction";
 import { TransactionRepository } from "../../../../src/repositories/implementations/TransactionRepository";
 import { TransactionDepositUseCase } from "@src/useCases/transactionDeposit/TransactionDepositUseCase";
+import { Connection, createConnection, getConnection } from "typeorm";
+
+let connection: Connection;
 
 describe('TransactionWithdrawUseCase', () => { 
   const transactionDTO = {
@@ -22,8 +25,18 @@ describe('TransactionWithdrawUseCase', () => {
   transaction.bonusAmount = 1.00;
   transaction.total = 201.00;
   
-  
-  it('Deve criar uma transação de retirada', async () => {
+  beforeAll(async () => {
+    connection = await createConnection();
+    await connection.runMigrations();
+  });
+
+  afterAll(async () => {
+    const mainConnection = getConnection();
+    await connection.close();
+    await mainConnection.close();
+  });
+
+  it('Should must create a withdrawal transaction', async () => {
     const transactionRepository = new TransactionRepository();
     const transactionDepositUseCase = new TransactionDepositUseCase(transactionRepository);
     

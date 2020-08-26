@@ -8,11 +8,11 @@ export class BankStatementController {
   
   async handle(request: Request, response: Response): Promise<Response> { 
     try {
-      const result = await this.bankStatementUseCase.execute(parseInt(request.param('account_id')));
-      return response.status(201).json(result);
+      const result = await this.bankStatementUseCase.execute(parseInt(request.params.account_id));
+      return response.status(200).json(result);
 
     } catch (error) {
-      return response.status(422).json({
+      return response.status(error.statusCode).json({
         message: error.message || 'Unexpected error.'
       });
     }

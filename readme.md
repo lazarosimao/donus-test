@@ -10,6 +10,7 @@ Criar uma API com algumas funções essenciais relacionadas ao gerenciamento de 
 - Jest
 - Typeorm
 - Sqlite3
+- JOI
 
 # TODO LIST 
 - [ x ] Devo criar a tabela Account
@@ -36,7 +37,8 @@ Criar uma API com algumas funções essenciais relacionadas ao gerenciamento de 
 
 # EXECUÇÃO
 - Instale as dependências
-`yarn install`
+`yarn install` e `yarn global add ts-node typescript`
+
 
 - Rode o comando para executar as migrations
 `yarn migrate:run`
@@ -45,4 +47,116 @@ Criar uma API com algumas funções essenciais relacionadas ao gerenciamento de 
 `yarn test`
 
 - Inicie o servidor
-`yarn start:dev`
+`yarn start`
+
+# DOCUMENTAÇÃO
+- [POST] - Create Account - `localhost:3333/api/v1/account/create`
+```
+BODY
+```
+```
+{
+	"fullName": "Lázaro Simão",
+	"registerCpf": "32123457689"
+}
+```
+```
+WHERE                   TYPE                    DESCRIPTION
+fullName                STRING                  Full name the a customer.
+registerCpf             STRING                  Document identify
+
+```
+```
+STATUS CODE             MESSAGE
+201                     Success
+400                     Error validating request body
+409                     Already an account with cpf
+500                     FATAL ERROR                     
+```
+
+- [POST] - Transaction Deposit - `localhost:3333/api/v1/transactions/deposit`
+```
+BODY
+```
+```
+{
+	"accountId": 2,
+	"amountRequest": 2000.00
+}
+```
+```
+WHERE                   TYPE                    DESCRIPTION
+accountId               NUMBER                  Code identify the an account
+amountRequest           NUMBER                  Amount request to deposit
+
+```
+```
+STATUS CODE             MESSAGE
+201                     Success
+400                     Error validating request body
+500                     FATAL ERROR                     
+```
+
+- [POST] - Transaction Withdraw - `localhost:3333/api/v1/transactions/withdraw`
+```
+BODY
+```
+```
+{
+	"accountId": 2,
+	"amountRequest": 2000.00
+}
+```
+```
+WHERE                   TYPE                    DESCRIPTION
+accountId               NUMBER                  Code identify the an account
+amountRequest           NUMBER                  Amount request to withdraw
+
+```
+```
+STATUS CODE             MESSAGE
+201                     Success
+400                     Error validating request body
+409                     Account does not have enough balance to effect this transaction
+500                     FATAL ERROR                     
+```
+
+- [POST] - Transaction Transfer - `localhost:3333/api/v1/transactions/transfer`
+```
+BODY
+```
+```
+{
+	"accountId": 2,
+      "toAccountId": 1,
+	"amountRequest": 200.00
+}
+```
+```
+WHERE                   TYPE                    DESCRIPTION
+accountId               NUMBER                  Code identify the an account
+toAccountId             NUMBER                  Code identify the an account
+amountRequest           NUMBER                  Amount request to withdraw
+
+```
+```
+STATUS CODE             MESSAGE
+201                     Success
+400                     Error validating request body
+409                     Account does not have enough balance to effect this transaction
+500                     FATAL ERROR                     
+```
+
+- [GET] - Account Historic - `localhost:3333/api/v1/account/1`
+```
+PARAMS
+```
+```
+WHERE                   TYPE                    DESCRIPTION
+1                       NUMBER                  Code identify the an account
+```
+```
+STATUS CODE             MESSAGE
+200                     [Return Data]
+500                     FATAL ERROR                     
+```

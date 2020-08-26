@@ -23,7 +23,7 @@ describe('BankStatementUseCase', () => {
     transactions: transaction
   }
 
-  it('Deve retornar a conta e as transações do cliente', async () => { 
+  it('Should return the customer account and transactions', async () => { 
     const transactionRepository = new TransactionRepository();
     const accountRepository = new AccountRepository();
     const bankStatementUseCase = new BankStatementUseCase(accountRepository, transactionRepository);

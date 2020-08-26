@@ -7,7 +7,7 @@
             "previewLimit": 50
         },
         {
-            "database": "${workspaceFolder:donus-test}/__tests__/database/storage/db-donus-tests.sqlite3",
+            "database": "${workspaceFolder:donus-test}/__tests__/database/storage/db-test.sqlite",
             "driver": "SQLite",
             "name": "db-test",
             "previewLimit": 50
